@@ -1,5 +1,4 @@
 import Ship from './Ship';
-//let Ship = require('./Ship')
 
 function Gameboard() {
 
@@ -56,6 +55,7 @@ function Gameboard() {
         return true;
     }
 
+    // function to check if ships still remain on the board
     let containsShips = () => {
         if (isEmpty(shipsContainer)){
             return false;
@@ -99,6 +99,7 @@ function Gameboard() {
                 if (board[x][y] === ''){
                     // if empty then put . in it
                     board[x][y] = '.';
+                    return true;
                 }
 
                 // return false since no ship was hit
@@ -111,6 +112,7 @@ function Gameboard() {
         }
     }
 
+    // check if obj is empty
     function isEmpty(obj){
         for (let key in obj){
             if(obj.hasOwnProperty(key)){
@@ -129,4 +131,3 @@ function Gameboard() {
 }
 
 export default Gameboard;
-//module.exports = Gameboard;

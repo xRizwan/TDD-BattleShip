@@ -38,8 +38,6 @@ describe("testing the gameplay", () => {
         computer.playerBoard.addShip(4, 2, 0);
         computer.playerBoard.addShip(3, 3, 0);
         computer.playerBoard.addShip(2, 4, 0);
-
-        let winner = false;
     })
 
     it("Testing auto gameplay vs both players", () => {
@@ -49,6 +47,6 @@ describe("testing the gameplay", () => {
 
     it("Testing if spot attacked on the board without ship is recorded", () => {
         expect(player.playTurn(player.enemy, 7, 0))
-        .toBeFalsy();
+        .toBeTruthy();
     })
 })

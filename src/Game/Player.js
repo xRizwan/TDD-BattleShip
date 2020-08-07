@@ -1,54 +1,89 @@
 import gameBoard from './Gameboard';
-//let gameBoard = require('./Gameboard');
 
 function Player(playerName) {
+
+    // main startup
     let name = playerName;
     let playerBoard = gameBoard();
     let enemy;
 
+    // function to play the turn
     let playTurn = (enemy, x, y) => {
+
+        // check if enemy board still has ships or not
         let won = !enemy.playerBoard.containsShips();
+
+        // if no ships are on the enemy board then player has won
         if (won){
-            console.log("Won Already");
-            return;
+            return true;
         }
 
+        // attack the board and save the result
         let result = enemy.playerBoard.recieveAttack(x, y);
-        result ? console.log("You Got HIM!"): console.log("Fail");
+        
+        if (!result){
+            // if board couldn't record damage
+            // coordinates are invalid
+            return false
+        }
 
+        // check if board has ships again
         won = !enemy.playerBoard.containsShips();
         if (won) {
-            console.log("WON!");
+            return true;
         }
+        return true;
     }
 
+    // implement auto turns for both computer and normal players
     let autoTurn = (enemy) => {
         let won = !enemy.playerBoard.containsShips();
         if (won){
             console.log("Won Already");
             return true;
         }
-        // implement auto turns for both computer and normal players
-        let randomX = Math.floor(Math.random() * 8);
-        let randomY = Math.floor(Math.random() * 8);
+
+        // generate random coordinates
+        let randomX = Math.floor(Math.random() * 10);
+        let randomY = Math.floor(Math.random() * 10);
         let eBoardSpot = enemy.playerBoard.board[randomX][randomY]
 
+        // if coordinates empty then continue
         if (eBoardSpot !== '.' && eBoardSpot !== 'x'){
-            let result = enemy.playerBoard.recieveAttack(randomX, randomY);
-            if (result) {
-                console.log("Got Him!")
-            }
-            else {
-                console.log("Fail!");
-            }
-            if (won) {
-                console.log("WON!");
-            }
+
+            // attack and save the result
+            enemy.playerBoard.recieveAttack(randomX, randomY);
         }
         else {
             return autoTurn(enemy);
         }
         won = !enemy.playerBoard.containsShips();
+    }
+
+    let autoPlace = (size) => {
+
+        // generating random coords
+        let randomX = Math.floor(Math.random() * 10);
+        let randomY = Math.floor(Math.random() * 10);
+        let result = playerBoard.addShip(size, randomX, randomY);
+
+        // if board failed to record the ships
+        // invalid coordinates
+        // try again
+        if (result === false){
+            return autoPlace(size)
+        }
+    }
+
+    // function to provide data to autoPlace function
+    let autoShipsAdd = () => {
+        let ships = [1,2,3,3,4,5];
+
+        // for each number in the ships array
+        // create a new ship of that size
+        for (let ship of ships){
+            autoPlace(ship);
+        }
     }
 
     return{
@@ -57,46 +92,13 @@ function Player(playerName) {
         enemy,
         playTurn,
         autoTurn,
+        autoShipsAdd,
     }
 }
 
-let player1 = Player("Rizwan");
-let player2 = Player("Computer");
-player1.enemy = player2;
-player2.enemy = player1;
 
-// computer ships
-player2.playerBoard.addShip(1, 7, 0);
-player2.playerBoard.addShip(1, 6, 0);
-player2.playerBoard.addShip(1, 5, 0);
-
-//playerships
-player1.playerBoard.addShip(1, 4, 0);
-player1.playerBoard.addShip(1, 6, 0);
-player1.playerBoard.addShip(1, 7, 0);
-
-
-//
-
-//let winner = false;
-// while(winner !== true){
-//     player1.autoTurn(player1.enemy);
-//     player2.autoTurn(player2.enemy);
-//     console.log(player1.playerBoard.board);
-//     console.log(player2.playerBoard.board);
-//     if (!player1.playerBoard.containsShips() || !player2.playerBoard.containsShips()){
-//         if (!player1.playerBoard.containsShips()){
-//             winner = true;
-//             console.log("player1");
-//         }
-//         else {
-//             console.log("computer")
-//             winner = true;
-//         }
-//     }
-// }
-
-// Mock Function
+// Mock Function to test auto playing capability of both players
+// without outside intervention
 let autoPlayer = (player, computer) => {
     let winner;
     while(winner !== true){
@@ -116,5 +118,6 @@ let autoPlayer = (player, computer) => {
     }
 }
 
+// exports
 export default Player;
 export { autoPlayer };

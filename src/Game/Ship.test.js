@@ -16,7 +16,7 @@ describe("Ships of size 2 testing", () => {
         ship.hit(1);
         ship.hit(0);
         expect(ship.isSunk())
-        .toBeTruthy;
+        .toBeTruthy();
     })
 
 })

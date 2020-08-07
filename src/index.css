@@ -5,9 +5,196 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 5px;
+  background-color: powderblue;
+  background: linear-gradient(to right, powderblue, rgb(119, 187, 255));
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.grid{
+  width: 400px;
+  height: 400px;
+}
+.grid-row{
+  width: 400px;
+  display: flex;
+}
+.grid-row-item{
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: 50px;
+  height: 38px;
+  flex-basis: auto;
+  flex-wrap: wrap;
+  text-align: center;
+  font-size: 30px;
+}
+.noShip{
+  background-color: #f4f4f4;
+}
+
+.ship{
+  background-color: #807070;
+  color: rgb(218, 71, 71);
+  animation-name: get-in;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes get-in {
+  0%{
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.Boards{
+  display: flex;
+  box-sizing: border-box;
+  margin-top: 20px;
+  width: fit-content;
+  margin: 0 auto;
+}
+#player {
+  margin: 0 20px;
+  background-color: palegoldenrod;
+}
+#computer {
+  margin: 0 20px;
+  background-color: palegoldenrod;
+}
+.ShipsContainer{
+  float: left;
+  margin-top: 50px;
+}
+.Ships {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 2px;
+}
+.ship-item{
+  width: 38px;
+  height: 38px;
+  background-color: rgb(97, 160, 223);
+  border: 1px solid black;
+}
+.hasShip{
+  background-color: rgb(97, 160, 223);
+  animation-name: ship-in;
+  animation-iteration-count: 1;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+}
+@keyframes ship-in {
+  0%{
+    position: relative;
+    bottom: 300px;
+  }
+  100%{
+    position: relative;
+    bottom: 0px;
+  }
+}
+
+.cShip{
+  background-color: palegoldenrod;
+}
+.Header {
+  background-color: navajowhite;
+  height: 80px;
+  margin-bottom : 10px;
+  display: flex;
+  animation-name: head-in;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+@keyframes head-in {
+  0%{
+    width: 0px;
+  }
+  100%{
+    width: 100%;
+  }
+}
+.Header .heading {
+  font-family: monospace;
+  font-size: 40px;
+  justify-content: flex-end;
+  align-self: center;
+  margin: 0 auto;
+  color: rgb(77, 134, 115);
+}
+.main-buttons {
+  text-align: center;
+}
+.main-buttons .button{
+  width: 100px;
+  height: 35px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  background: paleturquoise;
+  outline: none;
+  border: none;
+  animation-name: butt-in;
+  animation-iteration-count: 1;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+@keyframes butt-in {
+  0%{
+    position: relative;
+    left: 600px;
+  }
+  100%{
+    position: relative;
+    left: 0px;
+  }
+}
+.main-buttons .button:hover{
+  background: cadetblue;
+}
+.main-buttons .button:active{
+  background: pink;
+  transform: translateY(3px);
+}
+.Winner {
+  margin: 0 auto;
+  background-color: pink;
+  font-size: 30px;
+  width: fit-content;
+  margin-bottom: 10px;
+  animation-name: win-in;
+  animation-iteration-count: 1;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-in-out;
+}
+@keyframes win-in{
+  0%{
+    transform: scale(0)
+  }
+  100%{
+    transform: scale(1)
+  }
+}
+.board-name{
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  position: relative;
+  left: 30px;
+  padding: 20px;
+  color: black;
+}
+.board-name .player-board {
+  margin-right: 200px;
+}
+
+.board-name .computer-board {
+  margin-left: 100px;
 }

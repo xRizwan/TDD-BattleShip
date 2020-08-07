@@ -33,13 +33,13 @@ describe("Check if ship take damage if found", () => {
         .toBeFalsy();
     })
 
-    it('spot without ships dont take damage but record it', () => {
+    it('spot without ships dont take damage but are recorded', () => {
         expect(board.recieveAttack(0, 0))
-        .toBeFalsy();
+        .toBeTruthy();
     })
 
-    it('spot without ships dont take damage but are recorded', () => {
+    it('no ship remains in the board', () => {
         expect(board.containsShips())
-        .toBeFalsy()
+        .toBeFalsy();
     })
 })
